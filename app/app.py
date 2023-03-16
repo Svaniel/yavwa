@@ -60,12 +60,12 @@ def register():
 def login():
     if request.method == 'POST':
         # Get the form data
-        email = request.form['email']
+        name = request.form['username']
         password = request.form['password']
 
         # Query the database for the user with the matching email and password
         cursor = db.cursor()
-        cursor.execute('SELECT * FROM users WHERE email = %s AND password = %s', (email, password))
+        cursor.execute('SELECT * FROM users WHERE name = %s AND password = %s', (name, password))
         user = cursor.fetchone()
         cursor.close()
 
@@ -79,6 +79,7 @@ def login():
             return redirect(url_for('login'))
     else:
         return render_template('login.html')
+
 
 @app.route('/profile')
 def profile():
@@ -96,6 +97,24 @@ def profile():
     # Render profile template with user data
     return render_template('profile.html', user=user)
 
+@app.route('/settings/<int:id>', methods=['GET', 'POST'])
+def settings(id):
+    if request.method == 'POST':
+        email = request.form['email']
+        cursor = db.cursor()
+        cursor.execute("INSERT INTO users (email) VALUES (%s) WHERE id = %s", (email, id))
+        db.commit()
+        return redirect(url_for('profile'))
+    
+    cursor = db.cursor()
+    cursor.execute("SELECT * from users WHERE id = %s", (id,))
+    user = cursor.fetchone()
+    cursor.close()
+    
+    if user:
+        return render_template('settings.html', user=user)
+    else:
+        return "User not found"
 
 
 @app.route('/logout')
