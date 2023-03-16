@@ -11,6 +11,7 @@
             <li><a href="{{ url_for('home') }}">Home</a></li>
             {% if session.user_id %}
             <li><a href="{{ url_for('profile') }}">Profile</a></li>
+            <li><a href="{{ url_for('settings', id=session['user_id']) }}">Settings</a></li>
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
             {% else %}
             <li><a href="{{ url_for('login') }}">Login</a></li>
