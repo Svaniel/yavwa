@@ -6,28 +6,32 @@
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="{{ url_for('home') }}">Home</a></li>
-            {% if session.user_id %}
-            <li><a href="{{ url_for('profile') }}">Profile</a></li>
-            <li><a href="{{ url_for('settings', id=session['user_id']) }}">Settings</a></li>
-            <li><a href="{{ url_for('logout') }}">Logout</a></li>
-            {% else %}
-            <li><a href="{{ url_for('login') }}">Login</a></li>
-            <li><a href="{{ url_for('register') }}">Register</a></li>
-            {% endif %}
+    <div class="container">
+        <img class="symbol" src="{{ url_for('static', filename='img/symbol.png') }}" alt="Your image description" width="200" height="200">
+
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                {% if session.user_id %}
+                <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                <li><a href="{{ url_for('settings', id=session['user_id']) }}">Settings</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% else %}
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('register') }}">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="flash-messages">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
         </ul>
-    </nav>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul class="flash-messages">
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-    {% block content %}{% endblock %}
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
 </body>
 </html>

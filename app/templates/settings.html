@@ -3,7 +3,14 @@
 {% block title %}Settings{% endblock %}
 
 {% block content %}
-<h1>Profile</h1>
-<p>Name: {{ user.name }}</p>
-<p>Email: {{ user.email }}</p>
+<h1>Settings</h1>
+<form action="{{ url_for('settings', id=user[0]) }}" method="post">
+    <label for="name">Name:</label>
+    <input type="text" name="name" value="{{ user[1] }}" required>
+    <p>Email: {{ user[2] }}</p>
+    <label for="password">Password:</label>
+    <input type="password" name="password" required>
+
+    <button type="submit">Change</button>
+</form>
 {% endblock %}

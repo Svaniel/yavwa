@@ -1,11 +1,23 @@
 # Use an official Python runtime as a parent image
 FROM python:3.8-alpine
 
+# Create a group and user
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+# User to run with
+USER appuser
+
 # Set the working directory in the container
 WORKDIR /app
 
 # Copy the requirements file into the container
 COPY requirements.txt .
+
+# Add pip dir to PATH
+ENV PATH=/home/appuser/.local/bin:$PATH
+
+# Upgrade pip
+# RUN /usr/local/bin/python -m pip install --upgrade pip
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
