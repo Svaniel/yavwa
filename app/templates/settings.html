@@ -4,12 +4,20 @@
 
 {% block content %}
 <h1>Settings</h1>
+<p>Email: {{ user[2] }}</p>
+
 <form action="{{ url_for('settings', id=user[0]) }}" method="post">
-    <label for="name">Name:</label>
-    <input type="text" name="name" value="{{ user[1] }}" required>
-    <p>Email: {{ user[2] }}</p>
-    <label for="password">Password:</label>
-    <input type="password" name="password" required>
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" name="name" value="{{ user[1] }}" required>
+    </div>
+
+    
+
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" name="password" required>
+    </div>
 
     <button type="submit">Change</button>
 </form>
