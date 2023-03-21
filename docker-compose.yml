@@ -3,20 +3,11 @@ version: '3.4'
 services:
   db:
     image: mysql:5.7
-#    healthcheck:
-#      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
-#      interval: 3s
-#      retries: 5
-#      start_period: 30s
     environment:
       MYSQL_ROOT_PASSWORD: my-secret-pw
       MYSQL_DATABASE: mydatabase
       MYSQL_USER: myuser
       MYSQL_PASSWORD: mypassword
-#      MYSQL_HOST: 127.0.0.1
-#    expose:
-#      - 3306
-#      - 33060
 
   web:
     build: app
@@ -25,7 +16,6 @@ services:
       - "5000:5000"
     depends_on:
       - db
-#        condition: service_healthy
     environment:
       FLASK_APP: app.py
       FLASK_ENV: development

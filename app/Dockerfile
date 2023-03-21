@@ -34,4 +34,4 @@ ENV FLASK_RUN_HOST 0.0.0.0
 EXPOSE 5000
 
 # Start the Flask app when the container starts
-CMD ["flask", "run", "--host", "0.0.0.0"]
+CMD ["flask", "run"]
