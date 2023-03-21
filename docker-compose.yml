@@ -11,7 +11,7 @@ services:
 
   web:
     build: app
-#    restart: always
+    restart: always # If the DB is not up yet after first deployment
     ports:
       - "5000:5000"
     depends_on:
