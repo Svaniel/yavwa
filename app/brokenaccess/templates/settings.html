@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'idor_base.html' %}
 
 {% block title %}Settings{% endblock %}
 
@@ -6,7 +6,7 @@
 <h1>Settings</h1>
 <p>Email: {{ user[2] }}</p>
 
-<form action="{{ url_for('settings', id=user[0]) }}" method="post">
+<form action="{{ url_for('.settings', id=user[0]) }}" method="post">
     <div class="form-group">
         <label for="name">Name:</label>
         <input type="text" name="name" value="{{ user[1] }}" required>
